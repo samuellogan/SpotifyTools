@@ -12,7 +12,10 @@ var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
-require('dotenv').config(); // Dotenv library
+const dotenv = require('dotenv');
+
+dotenv.config({ path: '../.env' })
+console.log(process.env.SPOTIFY_SECRET);
 
 var client_id = '26a27233d0724741872b854b998d31ac'; // Your client id
 var client_secret = process.env.SPOTIFY_SECRET; // Your secret
@@ -103,6 +106,8 @@ app.get('/callback', function(req, res) {
         request.get(options, function(error, response, body) {
           console.log(body);
         });
+
+
 
         // we can also pass the token to the browser to make requests from there
         res.redirect('/#' +
